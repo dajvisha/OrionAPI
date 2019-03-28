@@ -7,8 +7,14 @@ const ChannelSchema = new Schema({
     user: {
         type: Schema.Types.ObjectId, ref: 'users'
     },
-    description: {
+    channel_name: {
         type: String,
+        unique: true,
+        required: true, 
+    },
+    channel_description: {
+        type: String,
+        required: true,
     },
     channel_image_ulr: {
         type: String,
@@ -16,16 +22,13 @@ const ChannelSchema = new Schema({
     subscriptors_number: {
         type: Number,
     },
-    videos_number: {
-        type: Number,
-    },
+    videos: [
+        { type: Schema.Types.ObjectId, ref: 'videos' }
+    ],
     is_active: {
         type: Boolean,
         default: true
     },
-    videos: [
-        { type: Schema.Types.ObjectId, ref: 'videos' }
-    ]
 }, { "collection": "channels", "timestamps": true });
 
 mongoose.Types.ObjectId.prototype.valueOf = function () {
