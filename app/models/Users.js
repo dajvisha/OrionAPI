@@ -26,6 +26,9 @@ const UserSchema = new Schema({
     profile_image_url: {
         type: String,
     },
+    subscriptions: [
+        { type: Schema.Types.ObjectId, ref: 'channels' }
+    ],
     email: {
         type: String,
         required: true,
