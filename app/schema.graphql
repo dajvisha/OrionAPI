@@ -1,0 +1,42 @@
+# Type definition
+
+type Auth {
+    token: String
+    message: String
+}
+
+type User {
+    _id: ID
+    first_name: String
+    last_name: String
+    username: String
+    profile_biography: String
+    profile_image_url: String
+    email: String
+    is_active: Boolean
+}
+
+# Input Fields
+
+input UserCreateInput {
+    first_name: String!
+    last_name: String!
+    username: String!
+    profile_biography: String
+    profile_image_url: String
+    email: String!
+    password: String!
+}
+
+# Queries
+
+type Query {
+    User(id: ID!): User
+    Users:[User]
+}
+
+# Mutations 
+
+type Mutation {
+    signup(data: UserCreateInput!): Auth
+}
