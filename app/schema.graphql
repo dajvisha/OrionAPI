@@ -1,3 +1,11 @@
+scalar Upload
+
+type File {
+    filename: String!
+    mimetype: String!
+    encoding: String!
+}
+
 # Type definition
 
 type Auth {
@@ -7,36 +15,73 @@ type Auth {
 
 type User {
     _id: ID
-    first_name: String
-    last_name: String
     username: String
-    profile_biography: String
-    profile_image_url: String
     email: String
+    bio: String
+    src: String
+    likes: Int
+    followers: Int
     is_active: Boolean
+}
+
+type Image {
+    _id: ID
+    user: String
+    src: String
+    likes_total: Int
+    comments_total: Int
+    comments: [Comment]
+}
+
+type Comment {
+    _id: ID
+    user_src: String
+    image: String
+    user: String
+    body: String
 }
 
 # Input Fields
 
 input UserCreateInput {
-    first_name: String!
-    last_name: String!
     username: String!
-    profile_biography: String
-    profile_image_url: String
     email: String!
+    bio: String!
+    src: String!
     password: String!
+}
+
+input ImageCreateInput {
+    user: String!
+    src: String!
+}
+
+input CommentCreateInput {
+    image: String!
+    user: String!
+    body: String!
+}
+
+input UploadCreateInput {
+    image: Upload!
+    user: String!
 }
 
 # Queries
 
 type Query {
-    User(id: ID!): User
-    Users:[User]
+    Users: [User]
+    Images(user: String!): [Image]
+    Comments(image: String!): [Comment]
+
+    User(username: String!): User
 }
 
 # Mutations 
 
 type Mutation {
+    addcomment(data: CommentCreateInput!): Comment
+    saveimage(data: ImageCreateInput!): Image
     signup(data: UserCreateInput!): Auth
+    singleUpload(data: UploadCreateInput!): Image
 }

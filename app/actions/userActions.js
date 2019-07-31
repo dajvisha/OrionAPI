@@ -27,10 +27,10 @@ const deleteUserById = (id) => {
     return deletedUser;
 };
 
-// Returns an user given its id
-const getUserById = (id) => {
+// Returns an user given its username
+const getUserByUsername = (username) => {
     let user = User.findOne({
-        _id: id,
+        username: username,
         is_active: true,
     });
 
@@ -65,7 +65,7 @@ module.exports = {
     createUser, 
     updateUserById,
     deleteUserById,
-    getUserById,
+    getUserByUsername,
     getUserByEmail,
     getUsers,
 };

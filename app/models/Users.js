@@ -7,32 +7,29 @@ const Schema = mongoose.Schema;
 
 // Defines User Schema
 const UserSchema = new Schema({
-    first_name: {
-        type: String,
-        required: true,
-    },
-    last_name: {
-        type: String,
-        required: true,
-    },
     username: {
         type: String,
         required: true,
         unique: true,
     },
-    profile_biography: {
-        type: String,
-    },
-    profile_image_url: {
-        type: String,
-    },
-    subscriptions: [
-        { type: Schema.Types.ObjectId, ref: 'channels' }
-    ],
     email: {
         type: String,
         required: true,
         unique: true,
+    },
+    bio: {
+        type: String,
+    },
+    src: {
+        type: String,
+    },
+    likes: {
+        type: Number,
+        default: 0
+    },
+    followers: {
+        type: Number,
+        default: 0
     },
     password: {
         type: String,
